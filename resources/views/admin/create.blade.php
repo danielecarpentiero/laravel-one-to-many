@@ -33,7 +33,7 @@
                 <option selected>Select a type</option>
                 @foreach ($types as $type)    
                 <option value="{{$type['id']}}" @if (old('type_id') == $type->id) selected      
-                @endif>{{$type['name']}}</option>
+                @endif>{{$type['title']}}</option>
                 @endforeach
               </select>
         </label>

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -25,7 +26,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $types = Type::all();
+        return view('admin.create', compact('types'));
     }
 
     /**
@@ -36,10 +38,12 @@ class ProjectController extends Controller
         $request->validated();
         $data = $request->all();
 
-        $project = new Project();
-        $project->fill($data);
-        $project->slug = Str::of($project->title)->slug('-');
-        $project->save();
+        $new_project = new Project();
+        $new_project->fill($data);
+        $new_project->slug = Str::of($new_project->title)->slug('-');
+        $new_project->save();
+
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -55,7 +59,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.edit', compact('project', 'types'));
     }
 
     /**
@@ -65,11 +70,11 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        $project->slug = Str::of($data['title'])->slug('-');
-
         $project->update($data);
+        $project->slug = Str::of($project['title'])->slug('-');
+        $project->save();
 
-        return redirect()->route('admin.show', $project->id);
+        return redirect()->route('admin.projects.index', $project->id);
     }
 
     /**
