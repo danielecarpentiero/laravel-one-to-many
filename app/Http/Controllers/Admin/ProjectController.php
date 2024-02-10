@@ -35,15 +35,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $request->validated();
-        $data = $request->all();
+
+        $data = $request->validated();
 
         $new_project = new Project();
         $new_project->fill($data);
         $new_project->slug = Str::of($new_project->title)->slug('-');
         $new_project->save();
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message', "Project #$new_project->id created successfully");
     }
 
     /**
