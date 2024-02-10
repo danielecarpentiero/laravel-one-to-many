@@ -7,6 +7,6 @@
         <h3>Type: {{$project->type?->title}}</h3>
         <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}">Back to projects list</a>
         <a class="btn btn-info my-3" href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Edit this project</a>
-        
+
     </div>
 @endsection
