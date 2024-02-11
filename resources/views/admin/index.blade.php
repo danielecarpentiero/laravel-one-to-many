@@ -9,11 +9,11 @@
             <a href="{{ route('admin.projects.show', $project) }}">
                 <h2 class="mt-3">{{ $project['title'] }}</h2>
             </a>
-            <form action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}" onsubmit="return confirm('Are you sure you want to delete this record?');" method="post">
+            <form action="{{ route('admin.projects.destroy', $project) }}" onsubmit="return confirm('Are you sure you want to delete this record?');" method="post">
                 @csrf
                 @method('delete')
                 <button class="btn btn-danger">Delete this record</button>
-                <a class="btn btn-info" href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Edit this record</a>
+                <a class="btn btn-info" href="{{ route('admin.projects.edit', $project) }}">Edit this record</a>
             </form>
         </li>
         @endforeach

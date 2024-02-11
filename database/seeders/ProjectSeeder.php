@@ -16,11 +16,11 @@ class ProjectSeeder extends Seeder
     public function run(Faker $faker): void
     {
         for ($i = 0; $i < 10; $i++) {
-            $project = new Project();
-            $project->title = $faker->sentence(3);
-            $project->description = $faker->text(500);
-            $project->slug = Str::of($project->title)->slug('-');
-            $project->save();
+            $new_project = new Project();
+            $new_project->title = $faker->sentence(3);
+            $new_project->description = $faker->text(500);
+            $new_project->slug = Str::of($new_project->title)->slug('-');
+            $new_project->save();
         }
     }
 }

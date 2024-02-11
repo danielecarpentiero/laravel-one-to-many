@@ -74,7 +74,7 @@ class ProjectController extends Controller
         $project->slug = Str::of($project['title'])->slug('-');
         $project->save();
 
-        return redirect()->route('admin.projects.index', $project->id);
+        return redirect()->route('admin.projects.index');
     }
 
     /**

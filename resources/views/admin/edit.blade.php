@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{route('admin.projects.update', ['project' => $project->id])}}" method="POST">
+        <form action="{{route('admin.projects.update', $project)}}" method="POST">
         @csrf
         @method('PATCH')
         <h1 class="text-center">Edit a project</h1>
@@ -23,7 +23,7 @@
                 <h2>Type</h2>
                 <select class="form-select" aria-label="Default select example" name="type_id">
                     <option selected>Select a type</option>
-                    @foreach ($types as $type)    
+                    @foreach ($types as $type)
                     <option value="{{$type->id}}" @if (old('type_id', $project->type_id) == $type->id) selected @endif>{{$type->title}}</option>
                     @endforeach
                 </select>
